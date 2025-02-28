@@ -15,6 +15,7 @@
 #define LOWER 1
 #define RAISE 2
 #define ADJUST 3
+#define COLEMAK 4
 
 / {
     // Activate ADJUST layer by pressing raise and lower
@@ -99,11 +100,11 @@
 
         adjust_layer {
             // ----------------------------------------------------------------------------------------------------------------------------
-            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |      |      |       |      |       |       |
-            // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |      |      |       |      |       |       |
-            // |        | RGB_BRD | RGB_BRI |         |         |         |                  |      |      |       |      |       |       |
-            // |        |         |         |         |         |         | RGB_TOG | |      |      |      |       |      |       |       |
-            //                    |         |         |         |         |         | |      |      |      |       |      |
+            // | BTCLR  |  BT1    |  BT2    |   BT3   |   BT4   |   BT5   |                  |         |      |       |      |       |       |
+            // | EXTPWR | RGB_HUD | RGB_HUI | RGB_SAD | RGB_SAI | RGB_EFF |                  |         |      |       |      |       |       |
+            // |        | RGB_BRD | RGB_BRI |         |         |         |                  |         |      |       |      |       |       |
+            // |        |         |         |         |         |         | RGB_TOG | |      |         |      |       |      |       |       |
+            //                    |         |         |         | OLD_TOG |         | |      | OLD_TOG |      |       |      |
 
             display-name = "adjust";
             bindings = <
@@ -111,7 +112,7 @@
 &ext_power EP_TOG  &rgb_ug RGB_HUD  &rgb_ug RGB_HUI  &rgb_ug RGB_SAD  &rgb_ug RGB_SAI  &rgb_ug RGB_EFF                                 &none         &none         &none         &none  &none  &none
 &none              &rgb_ug RGB_BRD  &rgb_ug RGB_BRI  &none            &none            &none                                           &none         &none         &none         &none  &none  &none
 &none              &none            &none            &none            &none            &none            &rgb_ug RGB_TOG    &none       &none         &none         &none         &none  &none  &none
-                                    &none            &none            &none            &none            &sys_reset         &sys_reset  &none         &none         &none         &none
+                                    &none            &none            &none            &tog OLD_TOG     &sys_reset         &sys_reset  &tog OLD_TOG  &none         &none         &none
             >;
         };
 
@@ -128,5 +129,13 @@
                 <&inc_dec_kp C_VOLUME_UP C_VOLUME_DOWN>,
                 <&inc_dec_kp C_BRIGHTNESS_INC C_BRIGHTNESS_DEC>;
         };
+    };
+};
+
+behaviors {
+    oled_toggle {
+        compatible = "zmk,behavior-toggle";
+        label = "OLD_TOG";
+        bindings = <&oled_enable &oled_disable>;
     };
 };

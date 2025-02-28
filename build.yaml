@@ -21,7 +21,5 @@
 include:
   - board: nice_nano_v2
     shield: sofle_left
-    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=y -DCONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER=n
   - board: nice_nano_v2
     shield: sofle_right
-    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
